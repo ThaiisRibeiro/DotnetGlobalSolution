@@ -1,0 +1,62 @@
+﻿@model Domain.Entities.PrecoEcologico
+@{
+    ViewData["Title"] = "Criar preço ecologico";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Cadastrar preco ecologico</h1>
+</div>
+
+
+<form asp-controller="PrecoEcologicoWeb" asp-action="Adcionar" method="post">
+
+    <div class="form-group">
+        <label form="nome" class="form label"> Estado</label>
+        <select asp-for="Estado" class="form-control">
+            <option value="AC"> Acre</option>
+            <option value="AL"> Alagoas</option>
+            <option value="AP"> Amapá</option>
+            <option value="AM"> Amazonas</option>
+            <option value="BA"> Bahia</option>
+            <option value="CE"> Ceará</option>
+            <option value="DF"> Distrito Federal</option>
+            <option value="ES"> Espírito Santo	</option>
+            <option value="0"> Selecione</option>
+            <option value="GO"> Maranhão</option>
+            <option value="MT"> Mato Grosso</option>
+            <option value="MS"> Mato Grosso do Sul</option>
+            <option value="MG"> Minas Gerais</option>
+            <option value="PA"> Pará</option>
+            <option value="PB"> Paraíba</option>
+            <option value="PR"> Paraná</option>
+            <option value="PE"> Pernambuco</option>
+            <option value="PI"> Piauí</option>
+            <option value="RJ"> Rio de Janeiro</option>
+            <option value="RN"> Rio Grande do Norte</option>
+            <option value="RS"> Rio Grande do Sul </option>
+            <option value="RO"> Rondônia</option>
+            <option value="RR"> Roraima</option>
+            <option value="SC"> Santa Catarina</option>
+            <option value="SP"> São Paulo</option>
+            <option value="SE"> Sergipe</option>
+            <option value="TO"> Tocantins</option>
+
+
+        </select>
+    </div>
+
+
+
+    <div class="form-group">
+        <label for="valor_1kwh" class="form-label">Valor_1kwh</label>
+        <input type="text" asp-for="Valor1kwh" class="form-control" placeholder="Digite o valor em 1kwh de energia solar: ">
+        @Html.ValidationMessageFor(x => x.Valor1kwh)
+    </div>
+
+
+    <br>
+    <button type="submit" class="btn btn-primary btn-block">Adicionar</button>
+    <a class="btn btn-secondary btn-block" asp-action="Index" asp-controller="PrecoEcologicoWeb" role="button">Voltar</a>
+
+</form>
+

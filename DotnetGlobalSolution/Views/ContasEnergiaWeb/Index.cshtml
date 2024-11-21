@@ -1,0 +1,146 @@
+﻿@model List<Domain.Entities.ContasEnergia>
+@{
+    ViewData["Title"] = "Listagem de Contas Energia";
+}
+
+  <!-- Retângulo principal com fundo verde -->
+<div style="width: 80%; margin: 0 auto; background-color: #6CC500; padding: 20px; border-radius: 10px; color: white; position: relative;">
+        
+        <!-- Imagem no canto superior direito -->
+        <img src="~/css/Imagens/LogoIcon-removebg-preview.png" alt="Imagem Canto Direito" style="position: absolute; top: 20px; right: 20px; width: 150px; height: 100px;">
+
+        <!-- Título -->
+        <div style="text-align: center; font-size: 54px; font-weight: bold;">
+            PAINEL ECONOMICO DE ENERGIA SUSTENTAVEL
+        </div>
+
+        <!-- Pular duas linhas -->
+        <br>
+
+        <!-- Campo Nome do Usuário e Botões -->
+        <div style="text-align: center;">
+            <span style="font-size: 16px;">Nome do Usuário</span>
+        <input readonly type="text" placeholder=@ViewBag.NomeUsuario style="padding: 8px; font-size: 20px; border-radius: 5px; margin-left: 10px;font-weight: bold;">
+     
+        <a class="btn btn-secondary btn-block" asp-action="Index" asp-controller="Login" role="button" style="margin-top: -10px">Voltar ao Login</a>
+        </div>
+
+        <!-- Linha azul escura -->  
+        <hr style="border: 1px solid #003366; margin-top: 20px;">
+
+       
+
+        <!-- Texto "TOTAL DE ENERGIA EM KW/H" e campo -->
+        <div style="text-align: center;">
+            <span style="font-size: 16px;">TOTAL DE ENERGIA EM KW/H:</span>
+        <input readonly type="text" placeholder=@ViewBag.ValorKwh.ToString("F0") style="padding: 8px; font-size: 30px; border-radius: 5px; margin-left: 10px; text-align: center;font-weight: bold; ">
+        </div>
+
+        <!-- Pular 4 linhas -->
+        <br><br>
+
+        <!-- Seção com 3 colunas: Energia Normal, Energia Sustentável e Economia -->
+        <div style="display: flex; justify-content: space-between;">
+
+            <!-- Energia Normal -->
+            <div style="width: 30%; text-align: center;">
+                <div>Energia Normal</div>
+                <img src="~/css/Imagens/EnergiaGastaIcon.png" alt="Imagem Energia Normal" style="width: 35%; border-radius: 10px; margin-top: 10px;">
+                <div>Total Gasto: R$ XXX,XX</div>
+            <input readonly type="text" placeholder=@ViewBag.ValorTotalPago.ToString("F2") style="padding: 8px; font-size: 30px; border-radius: 5px; margin-top: 5px; text-align: center;font-weight: bold;">
+            </div>
+
+            <!-- Energia Sustentável -->
+            <div style="width: 30%; text-align: center;">
+                <div>Energia Sustentável</div>
+                <img src="~/css/Imagens/energiasolarIcon.png" alt="Imagem Energia Sustentável" style="width: 35%; border-radius: 10px; margin-top: 10px;">
+                <div>Total Gasto: R$ XXX,XX</div>
+            <input readonly type="text" placeholder=@ViewBag.ValorTotalEconomico.ToString("F2") style="padding: 8px; font-size: 30px; border-radius: 5px; margin-top: 5px; text-align: center;font-weight: bold;">
+            </div>
+
+            <!-- Economia -->
+            <div style="width: 30%; text-align: center;">
+                <div>Economia</div>
+                <img src="~/css/Imagens/EconomiaIcon.png" alt="Imagem Economia" style="width: 35%; border-radius: 10px; margin-top: 10px;">
+                <div>Economia de R$ XXX.XX:</div>
+            <input readonly type="text" placeholder=@ViewBag.ValorTotalDesconto.ToString("F2") style="padding: 8px; font-size: 30px; border-radius: 5px; margin-top: 5px;text-align: center;font-weight: bold;">
+            </div>
+        </div>
+
+    </div>
+
+
+<div class="text-center">
+
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <a class="btn btn-primary" asp-controller="ContasEnergiaWeb" asp-action="Adcionar" role="button">Adicionar nova conta de luz</a>
+    </div>
+
+    <br />
+
+    @if (TempData["MensagemSucesso"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" aria-label="Close">X</button>
+            @TempData["MensagemSucesso"]
+        </div>
+    }
+
+    @if (TempData["MensagemErro"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" aria-label="Close">X</button>
+            @TempData["MensagemErro"]
+        </div>
+    }
+
+    <br />
+
+    <h1 class="display-4">Listagem de contas de energia</h1>
+
+    <table id="table-ContasEnergia" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Data</th>
+                <th scope="col">Quantidade em kwh</th>
+                <th scope="col"> Valor gasto </th>
+                <th scope="col"> Valor total ecologico </th>
+                <th scope="col"> Valor economizado </th>
+                
+               
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var ContasEnergia in Model)
+                {
+                    <tr>
+                        <th scope="row">@ContasEnergia.id_conta_energia</th>
+                        <td>@ContasEnergia.Data</td>
+                        <td>@ContasEnergia.Quantidadekwh.ToString("F0")</td>
+                        <td>@ContasEnergia.Valorgastoreal.ToString("F2")</td>
+                        <td>@ContasEnergia.Valortotalecologico.ToString("F2")</td>
+                        <td>@ContasEnergia.Valoreconomizado.ToString("F2")</td>
+                    
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a role="button" asp-action="Atualizar" asp-controller="ContasEnergiaWeb" asp-route-id="@ContasEnergia.id_conta_energia" class="btn btn-primary">Editar</a>
+                                <a role="button" asp-action="Excluir" asp-controller="ContasEnergiaWeb" asp-route-id="@ContasEnergia.id_conta_energia" class="btn btn-danger">Apagar</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr class="odd"><td valign="top" colspan="5">Nenhuma Conta de luz encontrada</td></tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+

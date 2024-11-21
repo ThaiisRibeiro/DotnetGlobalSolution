@@ -1,0 +1,68 @@
+﻿@using Domain.Entities
+@model List<Domain.Entities.PrecoEcologico>
+@{
+    ViewData["Title"] = "Listagem dos Preços Ecologicos";
+}
+
+<div class="text-center">
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <a class="btn btn-primary" asp-controller="PrecoEcologicoWeb" asp-action="Adcionar" role="button">Adicionar novo preco ecologico</a>
+    </div>
+
+    <br />
+
+    @if (TempData["MensagemSucesso"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" aria-label="Close">X</button>
+            @TempData["MensagemSucesso"]
+        </div>
+    }
+
+    <br />
+
+    <h1 class="display-4">Listagem de Preco Ecologico</h1>
+
+    <table id="table-Clinica" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Valor1kwh</th>
+               
+               
+               
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var PrecoEcologico in Model)
+                {
+                    <tr>
+                        <th scope="row">@PrecoEcologico.id_preco_ecologico</th>
+                        <td>@PrecoEcologico.Estado</td>
+                        <td>@PrecoEcologico.Valor1kwh</td>
+                        
+                   
+                        
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a role="button" asp-action="Atualizar" asp-controller="PrecoEcologicoWeb" asp-route-id="@PrecoEcologico.id_preco_ecologico" class="btn btn-primary">Editar</a>
+                               
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr class="odd"><td valign="top" colspan="5">Nenhum Preco Ecologico encontrado</td></tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+

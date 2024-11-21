@@ -1,0 +1,18 @@
+﻿@model Domain.Entities.ContasEnergia
+@{
+    ViewData["Title"] = "Excluir contas de luz";
+}
+<div class="text-center">
+    <h3>Realmente deseja apagar esta conta de luz? (@Model.Valorgastoreal)?</h3>
+</div>
+<input type="hidden" asp-for="id_conta_energia" />
+
+<form asp-controller="ContasEnergiaWeb" asp-action="Excluir" method="post">
+    <input type="hidden" asp-for="id_conta_energia" />
+
+
+    <br>
+    <button type="submit" class="btn btn-primary btn-block">Excluir</button>
+    <a class="btn btn-primary btn-block" asp-action="Index" asp-controller="ContasEnergiaWeb" role="button">Cancelar exclusão</a>
+
+</form>

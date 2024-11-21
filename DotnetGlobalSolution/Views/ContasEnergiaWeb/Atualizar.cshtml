@@ -1,0 +1,30 @@
+﻿@model Domain.Entities.ContasEnergia
+@{
+    ViewData["Title"] = "Atualizar contas pagar";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Atualizar contas de energia</h1>
+</div>
+
+
+<form asp-controller="ContasEnergiaWeb" asp-action="Atualizar" method="post">
+
+    <input type="hidden" asp-for="id_conta_energia" />
+
+    <div class="form-group">
+        <label for="nome" class="form-label">quantidadekwh</label>
+        <input type="text" asp-for="Quantidadekwh" class="form-control" placeholder="Digite a Quantidade em KW gasto da conta de luz: ">
+        @Html.ValidationMessageFor(x => x.Quantidadekwh)
+    </div>
+
+    <div class="form-group">
+        <label for="nome" class="form-label">valorgastoreal</label>
+        <input type="text" asp-for="Valorgastoreal" class="form-control" placeholder="Digite o Valor gasto da sua conta de luz: ">
+        @Html.ValidationMessageFor(x => x.Valorgastoreal)
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary btn-block">Alterar</button>
+    <a class="btn btn-secondary btn-block" asp-action="Index" asp-controller="ContasEnergiaWeb" role="button">Voltar</a>
+
+</form>

@@ -1,0 +1,32 @@
+﻿@model Domain.Entities.PrecoEcologico
+@{
+    ViewData["Title"] = "Atualizar Preco Ecologico";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Editar Valor do Preco Ecologico</h1>
+</div>
+
+
+<form asp-controller="PrecoEcologicoWeb" asp-action="Atualizar" method="post">
+
+    <input type="hidden" asp-for="id_preco_ecologico" />
+    <input type="hidden" asp-for="Data" />
+
+    <div class="form-group">
+        <label for="nome" class="form-label">Estado</label>
+        <input type="text" asp-for="Estado" class="form-control" placeholder="Estado" readonly>
+        @Html.ValidationMessageFor(x => x.Estado)
+    </div>
+
+    
+    <div class="form-group">
+        <label for="nome" class="form-label">Valor1kwh</label>
+        <input type="text" asp-for="Valor1kwh" class="form-control" placeholder="Atualize o valor de 1KWH de energia solar">
+        @Html.ValidationMessageFor(x => x.Valor1kwh)
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary btn-block">Alterar</button>
+    <a class="btn btn-secondary btn-block" asp-action="Index" asp-controller="PrecoEcologicoWeb" role="button">Voltar</a>
+
+</form>

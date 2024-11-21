@@ -1,0 +1,73 @@
+﻿@model List<Domain.Entities.Usuario>
+@{
+    ViewData["Title"] = "Listagem de Usuario";
+}
+
+<div class="text-center">
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <a class="btn btn-primary" asp-controller="UsuarioWeb" asp-action="Adcionar" role="button">Adicionar novo agendamento</a>
+    </div>
+
+    <br />
+
+    @if (TempData["MensagemSucesso"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" aria-label="Close">X</button>
+            @TempData["MensagemSucesso"]
+        </div>
+    }
+
+    <br />
+
+    <h1 class="display-4">Listagem de usuario</h1>
+
+    <table id="table-Usuario" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Endereco</th>
+                <th scope="col">Email</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Login</th>
+                <th scope="col">Senha</th>
+              
+               
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var Usuario in Model)
+                {
+                    <tr>
+                        <th scope="row">@Usuario.id_usuario</th>
+                        <td>@Usuario.Nome</td>
+                        <td>@Usuario.Endereco</td>
+                        <td>@Usuario.Email</td>
+                        <td>@Usuario.Estado</td>
+                        <td>@Usuario.Login</td>
+                        <td>@Usuario.Senha</td>
+                    
+                        
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a role="button" asp-action="Atualizar" asp-controller="UsuarioWeb" asp-route-id="@Usuario.id_usuario" class="btn btn-primary">Editar</a>
+                               
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr class="odd"><td valign="top" colspan="5">Nenhum Usuario encontrado</td></tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
