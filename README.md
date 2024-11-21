@@ -25,19 +25,37 @@ O **Eazy** aborda a questão do consumo elevado e desperdício de energia devido
 - 📈 **Insights Financeiros:** Obtenha dicas e relatórios sobre como reduzir seus custos e poupar dinheiro.
 
 ## 📝 **Como Usar**
-1. **Clone o Repositório**:
+## Instruções de Instalação e Configuração
+
+1. **Clone o Repositório:**
    ```bash
-   git clone https://github.com/seu-usuario/Eazy.git
+   git clone https://github.com/ThaiisRibeiro/DotnetGlobalSolution
+   cd DotnetGlobalSolution
    ```
-2. **Configure o Banco de Dados**:
-   - Certifique-se de que o banco de dados Oracle está configurado.
-   - Execute as Migrations para criar o banco de dados:
-     ```bash
-     dotnet ef database update
+
+2. **Configuração do Banco de Dados:**
+   - Crie o banco de dados no Oracle.
+   - Configure a string de conexão no arquivo `Context` e `Program` da aplicação:
+     
+     ```csharp
+     private string GetStringConectionConfig()
+     {
+         string strCon = "Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=oracle.fiap.com.br)(PORT=1521))) (CONNECT_DATA=(SERVER=DEDICATED)(SID=ORCL)));User Id=;Password=;";
+         return strCon;
+     }
      ```
-3. **Inicie a Aplicação**:
-   ```bash
-   dotnet run
-   ```
-4. **Acesse o Sistema**:
-   - Abra seu navegador em `http://localhost:5000` e comece a explorar!
+
+3. **Aplicação das Migrations:**
+   - Execute as migrations para criar as tabelas necessárias:
+     ```bash
+     Add-Migration Nome_do_seu_BD
+     Update-Database Nome_do_seu_BD
+     ```
+
+4. **Executar a Aplicação:**
+   - Inicie o servidor com:
+     ```bash
+     dotnet run
+     ```
+
+---
